@@ -4,7 +4,8 @@ import tensorflow as tf
 import tensorflow.keras.backend as K
 
 # Note all functions can be decorated with @tf.functions
-# all have been tested in pipelines involving TPUs
+# all have been tested in pipelines involving TPUs.
+# Functions may require image data type to be tf.float32
 
 # @tf.function
 def random_zoom_out_and_pan(image, image_size, range = (0.5, 0.9)):
@@ -70,7 +71,7 @@ def random_zoom_in(image, image_size, range = (0.5, 0.9)):
 
     # Crop + Resize -> Zoom-in
     cropped_img = tf.image.crop_to_bounding_box(image, y, x, dh, dw)
-    zoomed_img = tf.image.resize(cropped_img, size = img_size)
+    zoomed_img = tf.image.resize(cropped_img, size = image_size[:2])
     zoomed_img = tf.reshape(zoomed_img, image_size)
     return zoomed_img
 
