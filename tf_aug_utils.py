@@ -1,6 +1,7 @@
 import math, re
 import numpy as np
 import tensorflow as tf
+import tensorflow.keras.backend as K
 
 # Note all functions can be decorated with @tf.functions
 # all have been tested in pipelines involving TPUs
