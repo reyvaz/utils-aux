@@ -4,7 +4,6 @@ import tensorflow as tf
 
 # Note all functions can be decorated with @tf.functions
 # all have been tested in pipelines involving TPUs
-# tf.__version__ 2.2 < 2.4
 
 # @tf.function
 def random_zoom_out_and_pan(image, image_size, range = (0.5, 0.9)):
