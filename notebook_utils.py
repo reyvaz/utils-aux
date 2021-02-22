@@ -20,7 +20,7 @@ def plot_array(array):
     plt.show()
     return None
 
-def cm_plot(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
+def cm_plot2(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
             subtitle = '', save_fig = False, fontweight = 'normal'):
     '''
     Plots a heatmap of the confusion matrix
@@ -52,7 +52,9 @@ def cm_plot(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
             if cell_norm > 0.99 and cell_norm < 1.: cell_norm = '> 0.99'
             elif cell_norm > 0 and cell_norm < .01: cell_norm = '< 0.01'
             else: cell_norm = format(cell_norm, '.2f')
-            cell_text = '{}\n({})'.format(cm[x,y], cell_norm)
+            # if cm[x,y] == 0: cell_text = '{}\n '.format(cm[x,y])
+            if cm[x,y] == 0: cell_text = '0\n'
+            else: cell_text = '{}\n({})'.format(cm[x,y], cell_norm)
             ax.annotate(cell_text, xy=(y, x),
                     horizontalalignment='center',
                     fontweight = 'bold' if cm[x,y] > 0 else 'normal', size=12,
