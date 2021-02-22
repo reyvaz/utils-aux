@@ -20,7 +20,7 @@ def plot_array(array):
     plt.show()
     return None
 
-def cm_plot2(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
+def cm_plot(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
             subtitle = '', save_fig = False, fontweight = 'normal'):
     '''
     Plots a heatmap of the confusion matrix
