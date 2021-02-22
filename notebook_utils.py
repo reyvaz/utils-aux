@@ -1,10 +1,24 @@
 import tensorflow as tf
 import numpy as np
 from matplotlib import pyplot as plt
+import matplotlib as mpl
 import pandas as pd
 from sklearn.metrics import accuracy_score, confusion_matrix
 from datetime import datetime, timedelta
 from time import time, strftime, gmtime
+
+axes_color = '#999999'
+mpl.rcParams.update({'text.color' : "#999999", 'axes.labelcolor' : axes_color,
+                     'font.size': 10, 'xtick.color':axes_color,'ytick.color':axes_color,
+                     'axes.spines.top': False, 'axes.spines.right': False,
+                     'axes.edgecolor': axes_color, 'axes.linewidth':1.0, 'figure.figsize':[8, 4]})
+
+def plot_array(array):
+    plt.figure(figsize=(3, 3))
+    plt.imshow(array)
+    plt.axis('off')
+    plt.show()
+    return None
 
 def cm_plot(cm, labels, p_size = 8, cmap = plt.cm.Reds, contrast = 4,
             subtitle = '', save_fig = False, fontweight = 'normal'):
