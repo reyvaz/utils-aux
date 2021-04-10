@@ -27,9 +27,9 @@ def cm_html_list(cm, max_rgb = (0, 45, 66), contrast = 0.7, blank_zeros = False,
         blank_zeros: (bool) if True, it will leave blank cells with 0s
         text_color_thresh: (float) adjust to improve visibility of text in
             colored cells
-        supress: one of {False, 'norm', 'count'}. If False, the output will 
+        supress: one of {False, 'norm', 'count'}. If False, the output will
             include both, counts and normalized values in each cell. Otherwise
-            either will be supressed as indicated. 
+            either will be supressed as indicated.
         min_rgb: (tuple of ints) the rgb value for a cell with 0 observations
 
     Returns a list of lenght cm.shape[0] containing lists of strings to be used
@@ -51,7 +51,7 @@ def cm_html_list(cm, max_rgb = (0, 45, 66), contrast = 0.7, blank_zeros = False,
             else: txt_color = 'grey'
 
             # below avoids rounding up to 1.00 when 0.99 < n < 1.00
-            # and down to to 0.00 when 0.00 < n < 0.01 
+            # and down to to 0.00 when 0.00 < n < 0.01
             if n > 0.99 and n < 1.: n = '> 0.99'
             elif n > 0 and n < .01: n = '< 0.01'
             elif v == 0 and blank_zeros: n = ''; v = ''
@@ -117,7 +117,7 @@ def confusion_matrix_html(cm, classes = 'default', show_cm = True, title = '',
     Creates a string with the HTML code for a confusion matrix
     Args:
         cm: (numpy array) a square array confusion matrix
-        classes: 'default' or a list of classes
+        classes: 'default', a list of classes or a 1D numpy array.
         show_cm: (bool) if True, it will display the confusion matrix
             it requires `display` and `HTML` from `IPython.display`
         title: (str)
@@ -131,11 +131,11 @@ def confusion_matrix_html(cm, classes = 'default', show_cm = True, title = '',
         incl_css: if True, the output string will include additional CSS code
             for formatting confusion matrix cells.
         break_labels: (bool) if True, it will break class names at spaces
-        supress: one of {False, 'norm', 'count'}. If False, the output will 
+        supress: one of {False, 'norm', 'count'}. If False, the output will
             include both, counts and normalized values in each cell. Otherwise
-            either will be supressed as indicated. 
+            either will be supressed as indicated.
         min_rgb: (tuple of ints) the rgb value for a cell with 0 observations
-        html_file: (bool or str). If True or str, it will save the html code to 
+        html_file: (bool or str). If True or str, it will save the html code to
             a file. If str, the string will be the file name. If no extension is
             provided it defaults to .html
 
@@ -144,7 +144,8 @@ def confusion_matrix_html(cm, classes = 'default', show_cm = True, title = '',
     '''
     cell_vals = cm_html_list(cm, max_rgb, contrast, blank_zeros,
                              text_color_thresh, supress, min_rgb)
-    if classes == 'default':
+    if isinstance(classes, np.ndarray): classes = list(classes)
+    elif classes == 'default':
         classes = ['Class {}'.format(i+1) for i in range(cm.shape[0])]
 
     if break_labels: classes = [x.replace(' ', '<br>') for x in classes]
